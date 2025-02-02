@@ -1,0 +1,41 @@
+# Implementing a simple decorator to track function calls
+def trace(func):
+    def wrapper(*args, **kwargs):
+        print(f"Calling {func.__name__} with {args}, {kwargs}")
+        original_result = func(*args, **kwargs)
+        print(f"{func.__name__} returned {original_result}")
+        return original_result
+    return wrapper
+@trace
+def add(a, b):
+    return a + b
+print(add(10, 5))
+
+#Solution
+import java.util.function.BiFunction;
+
+public class DecoratorExample {
+    // Decorator function that wraps another function
+    public static BiFunction<Integer, Integer, Integer> trace(BiFunction<Integer, Integer, Integer> func) {
+        return (a, b) -> {
+            System.out.println("Calling " + func.getClass().getSimpleName() + " with (" + a + ", " + b + ")");
+            int result = func.apply(a, b);
+            System.out.println("Result: " + result);
+            return result;
+        };
+    }
+
+    // Simple function to add two numbers
+    public static int add(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        // Wrap the 'add' function with a decorator
+        BiFunction<Integer, Integer, Integer> tracedAdd = trace((a, b) -> add(a, b));
+
+        // Call the decorated function
+        System.out.println(tracedAdd.apply(10, 5));
+    }
+}
+
