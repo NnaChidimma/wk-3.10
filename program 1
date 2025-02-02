@@ -1,0 +1,32 @@
+# Using closures to create a function with a preserved state
+def make_multiplier(x):
+    def multiplier(n):
+        return x * n
+    return multiplier
+double = make_multiplier(2)
+triple = make_multiplier(3)
+print("Double 5:", double(5))
+print("Triple 5:", triple(5))
+
+
+#Solution
+
+
+import java.util.function.Function;
+
+public class ClosureExample {
+    // Method that returns a lambda function (closure)
+    public static Function<Integer, Integer> makeMultiplier(int x) {
+        return (Integer n) -> x * n;  // Preserves 'x' as state
+    }
+
+    public static void main(String[] args) {
+        // Create multiplier functions with preserved state
+        Function<Integer, Integer> doubleMultiplier = makeMultiplier(2);
+        Function<Integer, Integer> tripleMultiplier = makeMultiplier(3);
+
+        // Use the closures to multiply values
+        System.out.println("Double 5: " + doubleMultiplier.apply(5));
+        System.out.println("Triple 5: " + tripleMultiplier.apply(5));
+    }
+}
